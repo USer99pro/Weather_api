@@ -1,0 +1,113 @@
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8fafc;
+  padding: 1rem;
+  width: 100%;
+}
+.input {
+  max-width: 190px;
+  background-color: #f5f5f5;
+  color: #242424;
+  padding: 0.15rem 0.5rem;
+  min-height: 40px;
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  line-height: 1.15;
+  box-shadow: 0px 10px 20px -18px;
+}
+
+input:focus {
+  border-bottom: 2px solid #5b5fc7;
+  border-radius: 4px 4px 2px 2px;
+}
+
+input:hover {
+  outline: 1px solid lightgrey;
+}
+
+.navbar h1 {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: #3b82f6;
+}
+
+.navbar .search-container {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+
+/* คำเตือน error */
+.error {
+  color: #ef4444;
+}
+
+
+
+/* กรอบ card หลัก */
+.card {
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0.375rem;
+  padding: 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  width: 100%; /* กำหนดให้ขนาดของ card ยืดหยุ่น */
+  height: 350px; /* กำหนดความสูงของ card */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* จัดตำแหน่งภาพและข้อความ */
+}
+
+/* ใช้ภาพพื้นหลัง */
+.card .background {
+  background-image: url("path_to_your_image.jpg"); /* แทนที่ด้วย path ภาพจริง */
+  background-size: cover;
+  background-position: center;
+  height: 50%; /* ความสูงของภาพที่แสดง */
+  width: 100%;
+  border-radius: 0.375rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+/* ข้อความภายใน card */
+.card .info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.8); /* ทำให้พื้นหลังโปร่งแสง */
+  padding: 1rem;
+  border-radius: 0.375rem;
+  z-index: 10; /* ป้องกันข้อความถูกทับด้วยภาพ */
+}
+
+.card .info h3 {
+  font-size: 1.125rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem; /* เพิ่มระยะห่างระหว่างชื่อกับข้อมูล */
+}
+
+.card .info p {
+  font-size: 0.875rem;
+  margin: 0.25rem 0;
+}
+
+/* ปรับความกว้างของ grid ในข้อมูลอากาศเมืองเริ่มต้น */
+.default-cities .grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(280px, 1fr)
+  ); /* ทำให้ grid รองรับหลายคอลัมน์ */
+  gap: 1rem;
+}
