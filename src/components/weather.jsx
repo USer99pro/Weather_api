@@ -175,10 +175,10 @@ const Weather = () => {
   }, []);
 
   return (
-    <div className="min-h-screen w-full bg-[#29a0b1]">
-      <div className="container mx-auto p-4">
+    <div className="min-h-screen w-full  bg-gradient-to-b from-indigo-500 to-pink-400 shadow-lg ">
+      <div className="container mx-auto ">
         {/* Navbar */}
-        <div className="flex justify-between items-center mb-6 bg-[#167d7f] p-4 rounded-lg shadow-md">
+        <div className="flex justify-between items-center mb-6 bg-[#3c659e] p-4 rounded-lg shadow-md">
           <h1 className="text-2xl font-bold text-white">Weather App</h1>
           <div className="flex gap-2">
             <input
@@ -207,15 +207,15 @@ const Weather = () => {
 
         {/* Searched City */}
         {weather && (
-          <div className="card bg-[#fff9e3] rounded-lg shadow-md overflow-hidden mb-6 mx-auto max-w-md">
+          <div className="card rounded-lg shadow-md overflow-hidden mb-6 mx-auto max-w-md">
             <div
               className="h-48 bg-cover bg-center"
               style={{
                 backgroundImage: `url(https://openweathermap.org/img/wn/${weather.icon}@2x.png)`,
               }}
             ></div>
-            <div className="p-4 text-center ">
-              <h3 className="text-xl font-bold">{weather.city}</h3>
+            <div className="p-4 ">
+              <h3 className="text-xl font-bold text-center text-white">เมือง: {weather.city}</h3>
               <p className="text-sm">อุณหภูมิ: {weather.temperature}°C</p>
               <p className="text-sm">ความชื้น: {weather.humidity}%</p>
               <p className="text-sm ">สภาพอากาศ: {weather.description}</p>
@@ -225,14 +225,14 @@ const Weather = () => {
 
         {/* Default Cities */}
         <div>
-          <h2 className="text-xl font-bold text-center mb-4 ">
-            ข้อมูลอากาศเมืองเริ่มต้น
+          <h2 className="text-3xl font-bold text-center mb-4 underline ... text-white">
+            ข้อมูลอากาศเมือง
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 ">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 m-9 ">
             {defaultCitiesWeather.map((cityWeather, index) => (
               <div
                 key={index}
-                className="bg-white rounded-lg shadow-md overflow-hidden"
+                className=" rounded-lg shadow-md overflow-hidden"
               >
                 <div
                   className="h-32 bg-cover bg-center "
@@ -240,7 +240,7 @@ const Weather = () => {
                     backgroundImage: `url(https://openweathermap.org/img/wn/${cityWeather.icon}@2x.png)`,
                   }}
                 ></div>
-                <div className="p-4  bg-[#5ac4a0] text-white ">
+                <div className="p-4   text-white ">
                   <h3 className="text-lg font-bold text-center">
                     เมือง: {cityWeather.city}
                   </h3>
