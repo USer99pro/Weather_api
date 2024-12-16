@@ -7,12 +7,12 @@ const citiesData = [
   "Paris",
   "Dakhla",
   "Morocco",
-  "Hong Kong",
-  "Cape Town",
-  "Cairo",
-  "Sydney",
-  "Sao Paulo",
-  "Toronto",
+//   "Hong Kong",
+//   "Cape Town",
+//   "Cairo",
+//   "Sydney",
+//   "Sao Paulo",
+//   "Toronto",
 ];
 
 export default citiesData;
