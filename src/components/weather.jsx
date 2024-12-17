@@ -1,126 +1,3 @@
-// import { useState, useEffect } from 'react';
-// import axios from 'axios';
-// import citiesData from './citiesData';
-// import './styles.css';
-
-// const Weather = () => {
-//   const [city, setCity] = useState('');
-//   const [weather, setWeather] = useState(null);
-//   const [defaultCitiesWeather, setDefaultCitiesWeather] = useState([]);
-//   const [error, setError] = useState('');
-
-//   const fetchWeather = async (city) => {
-//     const apiKey = import.meta.env.VITE_OPENWEATHER_API_KEY;
-//     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
-
-//     try {
-//       const response = await axios.get(url);
-//       return {
-//         city: response.data.name,
-//         temperature: response.data.main.temp,
-//         description: response.data.weather[0].description,
-//         humidity: response.data.main.humidity,
-//         icon: response.data.weather[0].icon, // เพิ่มการดึงไอคอน
-//       };
-//     } catch (err) {
-//       console.error(`Error fetching weather data for ${city}:`, err.message);
-//       return null;
-//     }
-//   };
-
-//   const fetchDefaultCitiesWeather = async () => {
-//     const citiesWeather = await Promise.all(
-//       citiesData.map((city) => fetchWeather(city))
-//     );
-//     setDefaultCitiesWeather(citiesWeather.filter(Boolean));
-//   };
-
-//   const handleSearch = async () => {
-//     if (!city) return;
-//     const weatherData = await fetchWeather(city);
-//     if (weatherData) {
-//       setWeather(weatherData);
-//       setError('');
-//     } else {
-//       setError('ไม่พบข้อมูลอากาศของเมืองนี้');
-//       setWeather(null);
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchDefaultCitiesWeather();
-//   }, []);
-
-//   return (
-//     <div className="container">
-//       <div className="navbar">
-//         <h1>Weather App</h1>
-//         <div className="search-container">
-//           <input
-//             type="text"
-//             placeholder="ค้นหาเมือง"
-//             value={city}
-//             onChange={(e) => setCity(e.target.value)}
-//             className="input"
-//           />
-//           <button onClick={handleSearch} className="button">
-//             ค้นหา
-//           </button>
-//         </div>
-//       </div>
-
-//       {error && <p className="error">{error}</p>}
-
-//       {weather && (
-//         <div className="card">
-//           <div className="background">
-//             {/* ใช้ไอคอนหรือภาพตามข้อมูลที่ได้จาก API */}
-//             <img
-//               src={`https://openweathermap.org/img/wn/${weather.icon}.png`}
-//               alt={weather.description}
-//               className="icon"
-//             />
-//           </div>
-//           <div className="info">
-//             <h3>{weather.city}</h3>
-//             <p>อุณหภูมิ: {weather.temperature}°C</p>
-//             <p>ความชื้น: {weather.humidity}%</p>
-//             <p>สภาพอากาศ: {weather.description}</p>
-//           </div>
-//         </div>
-//       )}
-
-//       <div className="default-cities">
-//         <h2 className="default-cities-header">ข้อมูลอากาศเมืองเริ่มต้น</h2>
-//         <div className="grid">
-//           {defaultCitiesWeather.map((cityWeather, index) => (
-//             <div key={index} className="card">
-//               <div className="background">
-//                 {/* ใส่ภาพพื้นหลังหรือไอคอน */}
-//                 <img
-//                   src={`https://openweathermap.org/img/wn/${cityWeather.icon}.png`}
-//                   alt={cityWeather.description}
-//                   className="icon"
-//                 />
-//               </div>
-//               <div className="info">
-//                 <h3>{cityWeather.city}</h3>
-//                 <p>อุณหภูมิ: {cityWeather.temperature}°C</p>
-//                 <p>ความชื้น: {cityWeather.humidity}%</p>
-//                 <p>สภาพอากาศ: {cityWeather.description}</p>
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Weather;
-
-//**************** React + tailwindcss ***********************
-
 import { useState, useEffect } from "react";
 import axios from "axios";
 import citiesData from "./citiesData";
@@ -133,7 +10,7 @@ const Weather = () => {
   const [error, setError] = useState("");
 
   const fetchWeather = async (city) => {
-    const apiKey = import.meta.env.VITE_OPENWEATHER_API_KEY;
+    const apiKey = import.meta.env.VITE_OPENWEATHER_API_KEY; // ตรวจสอบ API KEY
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
 
     try {
@@ -143,11 +20,11 @@ const Weather = () => {
         temperature: response.data.main.temp,
         description: response.data.weather[0].description,
         humidity: response.data.main.humidity,
-        icon: response.data.weather[0].icon, // ไอคอนของสภาพอากาศ
+        icon: response.data.weather[0].icon,
       };
     } catch (err) {
       console.error(`Error fetching weather data for ${city}:`, err.message);
-      return null;
+      return null; // ส่งค่า null กลับไปหากมีปัญหา
     }
   };
 
@@ -155,15 +32,15 @@ const Weather = () => {
     const citiesWeather = await Promise.all(
       citiesData.map((city) => fetchWeather(city))
     );
-    setDefaultCitiesWeather(citiesWeather.filter(Boolean));
+    setDefaultCitiesWeather(citiesWeather.filter(Boolean)); // ลบข้อมูลที่เป็น null ออก
   };
 
   const handleSearch = async () => {
-    if (!city) return;
+    if (!city) return; // ไม่ทำงานถ้าไม่กรอกชื่อเมือง
     const weatherData = await fetchWeather(city);
     if (weatherData) {
       setWeather(weatherData);
-      setError("");
+      setError(""); // รีเซ็ต Error
     } else {
       setError("ไม่พบข้อมูลอากาศของเมืองนี้");
       setWeather(null);
@@ -175,10 +52,10 @@ const Weather = () => {
   }, []);
 
   return (
-    <div className="min-h-screen w-full  bg-gradient-to-b from-indigo-500 to-pink-400 shadow-lg ">
-      <div className="container mx-auto ">
+    <div className="relative w-full min-h-screen bg-cover bg-center bg-[url('./qQa5Pd7-weather-wallpapers.jpg')] mx-auto bg-no-repeat">
+      <div className="container mx-auto p-4">
         {/* Navbar */}
-        <div className="flex justify-between items-center mb-6 bg-[#3c659e] p-4 rounded-lg shadow-md">
+        <div className="flex justify-between items-center mb-6 bg-gradient-to-r from-white/20 to-white/5 backdrop-blur-md p-4 rounded-lg shadow-md">
           <h1 className="text-2xl font-bold text-white">Weather App</h1>
           <div className="flex gap-2">
             <input
@@ -199,64 +76,54 @@ const Weather = () => {
 
         {/* Error */}
         {error && (
-          <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md mb-6">
-            <p className="font-semibold">เกิดข้อผิดพลาด:</p>
-            <p>{error}</p>
+          <div className="text-center text-red-500 mb-4">
+            {error}
           </div>
         )}
 
-        {/* Searched City */}
+        {/* แสดงสภาพอากาศเมื่อค้นหา */}
         {weather && (
-          <div className="card rounded-lg shadow-md overflow-hidden mb-6 mx-auto max-w-md">
+          <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg overflow-hidden ">
             <div
-              className="h-48 bg-cover bg-center"
+              className="w-20 h-20 mx-auto bg-no-repeat bg-center bg-contain blur-[10%] backdrop-blur-[10px]"
               style={{
                 backgroundImage: `url(https://openweathermap.org/img/wn/${weather.icon}@2x.png)`,
               }}
             ></div>
-            <div className="p-4 ">
-              <h3 className="text-xl font-bold text-center text-white">เมือง: {weather.city}</h3>
-              <p className="text-sm">อุณหภูมิ: {weather.temperature}°C</p>
-              <p className="text-sm">ความชื้น: {weather.humidity}%</p>
-              <p className="text-sm ">สภาพอากาศ: {weather.description}</p>
+            <div className="p-4 text-center">
+              <h3 className="text-lg font-bold mb-2">เมือง: {weather.city}</h3>
+              <p>อุณหภูมิ: {weather.temperature}°C</p>
+              <p>ความชื้น: {weather.humidity}%</p>
+              <p>สภาพอากาศ: {weather.description}</p>
             </div>
           </div>
         )}
 
         {/* Default Cities */}
-        <div>
-          <h2 className="text-3xl font-bold text-center mb-4 underline ... text-white">
-            ข้อมูลอากาศเมือง
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 m-9 ">
-            {defaultCitiesWeather.map((cityWeather, index) => (
-              <div
-                key={index}
-                className=" rounded-lg shadow-md overflow-hidden"
-              >
+        <h2 className="text-3xl font-bold text-center mb-6 text-white">
+          ข้อมูลอากาศเมือง
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 m-9">
+          {defaultCitiesWeather.map((cityWeather, index) => (
+            <div key={index} className="rounded-lg shadow-md overflow-hidden">
+              <div>
                 <div
-                  className="h-32 bg-cover bg-center "
+                  className="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 mx-auto bg-no-repeat bg-center bg-contain"
                   style={{
                     backgroundImage: `url(https://openweathermap.org/img/wn/${cityWeather.icon}@2x.png)`,
                   }}
                 ></div>
-                <div className="p-4   text-white ">
-                  <h3 className="text-lg font-bold text-center">
-                    เมือง: {cityWeather.city}
-                  </h3>
-                  <p className="text-base-content">
-                    อุณหภูมิ: {cityWeather.temperature}°C
-                  </p>
-                  <p className="text-base-content ">
-                    ความชื้น: {cityWeather.humidity}%
-                  </p>
-                  <p className="text-base-content ">
-                    สภาพอากาศ: {cityWeather.description}
-                  </p>
-                </div>
               </div>
-            ))}
-          </div>
+              <div className="p-4 bg-white">
+                <h3 className="text-lg font-bold text-center">
+                  เมือง: {cityWeather.city}
+                </h3>
+                <p>อุณหภูมิ: {cityWeather.temperature}°C</p>
+                <p>ความชื้น: {cityWeather.humidity}%</p>
+                <p>สภาพอากาศ: {cityWeather.description}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
